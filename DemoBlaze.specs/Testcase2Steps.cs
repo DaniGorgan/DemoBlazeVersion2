@@ -5,12 +5,12 @@ using DemoBlaze.specs.PageObjectModels;
 
 namespace DemoBlaze.specs
 {
-    [Binding, Scope(Feature = "Testcase2")]
+    [Binding, Scope(Feature = "Testcase2")]   //am rulat acest test si da fail
     public class Testcase2Steps
     {
         public static IWebDriver driver;
 
-        public string newUsername = "TestUser3";
+        public string newUsername = "TestUser3";//pentru testele de register e bine sa se foloseasca useri unici la fiecare rulare, poti genera un user unic folosind o logica in a crea useruname-ul (vezi metoda Random())
         public string newPassword = "TempPassword";
 
         [Given(@"I am on the homepage")]
