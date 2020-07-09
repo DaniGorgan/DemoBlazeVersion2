@@ -1,11 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DemoBlaze.specs.PageObjectModels
 {
@@ -37,6 +33,8 @@ namespace DemoBlaze.specs.PageObjectModels
 
             Driver.FindElement(By.CssSelector("#orderModal > div > div > div.modal-footer > button.btn.btn-primary")).Click();
 
+            //remove thread.sleep. Try to use explicit wait if you need to wait for something
+            //you can use wait referenced above
             Thread.Sleep(1000);
         }
 
@@ -44,6 +42,7 @@ namespace DemoBlaze.specs.PageObjectModels
         {
             Driver.FindElement(By.XPath("/html/body/div[10]/div[7]/div/button")).Click();
 
+            //remove thread.sleep
             Thread.Sleep(1000);
         }
 

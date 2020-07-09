@@ -6,11 +6,12 @@ Scenario: Create a parameterized test (using scenario outline) that can access a
 	Given I am on the homepage
 	When I access “<page>”
 	Then the correct page should be displayed
-Examples: 
-| page   |
-| Home    |
-| Contact   |
-| About us |
-| Cart |
-| Log in |
-| Sign up |
+
+	Examples:
+		| page     |
+		| Home     |
+		| Contact  |
+		| About us |
+		| Cart     |
+		| Log in   |
+		| Sign up  |

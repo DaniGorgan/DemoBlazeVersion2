@@ -40,7 +40,7 @@ namespace DemoBlaze.specs
             var homePage = new HomePage(driver);
             ReadOnlyCollection<IWebElement> _products = homePage.returnAllElementsFiltered();
             int numberOfProducts = _products.Count();
-
+            //you need to do an average of products prices: e.g. Laptops.
             output.WriteLine("total number of filtered products: " + numberOfProducts);
         }
 
