@@ -49,7 +49,9 @@ namespace DemoBlaze.specs
         }
         
         [When(@"I add the items needed in the cart")]
-        public void WhenIAddTheItemsNeededInTheCart()
+        public void WhenIAddTheItemsNeededInTheCart() // am rulat si am ajuns in cos cu produse ce valorau un total de peste 16000 de $
+                                                     // un mod de a face ar fi sa iei produsul din fiecare categorie care are cel mai mic pret, le adaugi in cart si apoi verifici ca se 
+                                                    // incadreaza in buget
         {
             /* method needs to change. Some implementation ways:
              * 1. To be sure that you can stay in the budget, scan all the prices from each
@@ -67,8 +69,8 @@ namespace DemoBlaze.specs
                 //phone
                 homePage.filterBy("Phones");
 
-                ReadOnlyCollection<IWebElement> _divs = homePage.returnAllElementsFiltered();
-                int selector = number.Next(1, _divs.Count);
+                ReadOnlyCollection<IWebElement> _filteredProducts = homePage.returnAllElementsFiltered();// o denumire mai clara a variabilelor. Divs nu prea ajuta pentru a intelege ce elemente contine
+                int selector = number.Next(1, _filteredProducts.Count);
 
                 phoneName = homePage.getProductName(selector);
                 phonePrice = homePage.getProductPrice(selector);
@@ -89,8 +91,8 @@ namespace DemoBlaze.specs
                 //laptop
                 homePage.filterBy("Laptops");
 
-                _divs = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _divs.Count);
+                _filteredProducts = homePage.returnAllElementsFiltered();
+                selector = number.Next(1, _filteredProducts.Count);
 
                 laptopName = homePage.getProductName(selector);
                 laptopPrice = homePage.getProductPrice(selector);
@@ -111,8 +113,8 @@ namespace DemoBlaze.specs
                 //monitor
                 homePage.filterBy("Monitors");
 
-                _divs = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _divs.Count);
+                _filteredProducts = homePage.returnAllElementsFiltered();
+                selector = number.Next(1, _filteredProducts.Count);
 
                 monitorName = homePage.getProductName(selector);
                 monitorPrice = homePage.getProductPrice(selector);
@@ -142,7 +144,7 @@ namespace DemoBlaze.specs
             cartPage.NavigateTo();
             cartPage.pressCheckout();
             Thread.Sleep(1000);
-            cartPage.completeOrderForm();
+            cartPage.completeOrderForm("Test User", "Romania", "Timisoara", "1234 5678 1234 5678", "July", "2020");
 
             try
             {
