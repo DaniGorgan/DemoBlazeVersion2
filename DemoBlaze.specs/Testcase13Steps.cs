@@ -9,6 +9,7 @@ using DemoBlaze.specs.PageObjectModels;
 
 namespace DemoBlaze.specs
 {
+    //Test is incorrect. After one test execution i ended up with a bill of 8480$. 
     [Binding, Scope(Feature = "Testcase13")]
     public class Testcase13Steps
     {
@@ -52,6 +53,14 @@ namespace DemoBlaze.specs
                                                      // un mod de a face ar fi sa iei produsul din fiecare categorie care are cel mai mic pret, le adaugi in cart si apoi verifici ca se 
                                                     // incadreaza in buget
         {
+            /* method needs to change. Some implementation ways:
+             * 1. To be sure that you can stay in the budget, scan all the prices from each
+             * category, chose the lowest, then add them to cart. This is the easiest way
+             * 2. If you want to take them random, scan the prices from each category and save
+             * them to a list of objects with properties (phone name / price).
+             * then do a random pick from each list. After that, compare result with give budget.
+             * When you found the right price, you can select then each product and add it to cart
+             */
             var homePage = new HomePage(driver);
             tempBudget = remainingBudget;
 

@@ -1,11 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DemoBlaze.specs.PageObjectModels
 {
@@ -41,7 +37,12 @@ namespace DemoBlaze.specs.PageObjectModels
             // La fel cum ai facut cu CartUrl, CartTitle
             // apoi in metodele unde ai nevoie de element il folosesti. 
 
+            //FeedbackCristianPopescu
+            //remove thread.sleep. Try to use explicit wait if you need to wait for something
+            //you can use wait referenced above
+
             //this sleep is necessary since the fields aren't active yet, wait.Until from below doesn't seem to do the trick, need more info
+
             Thread.Sleep(1000);
 
             wait.Until((d) => Driver.FindElement(By.Id("name")));
@@ -62,8 +63,13 @@ namespace DemoBlaze.specs.PageObjectModels
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(2));
 
+            //FeedbackCristianPopescu
+            //remove thread.sleep
+            Thread.Sleep(1000);
+
             IWebElement confirmOrderButton = wait.Until((d) => Driver.FindElement(By.XPath("/html/body/div[10]/div[7]/div/button")));
             confirmOrderButton.Click();
+
         }
 
         public void NavigateTo()

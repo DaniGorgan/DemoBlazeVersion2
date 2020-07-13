@@ -11,3 +11,5 @@ namespace DemoBlaze.specs.Utils
         public string productFilter { get; set; }
     }
 }
+
+//is this needed? Try to remove unused code

@@ -1,13 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
 using Xunit;
 
 namespace DemoBlaze.specs.PageObjectModels
@@ -30,6 +25,8 @@ namespace DemoBlaze.specs.PageObjectModels
         {
             Driver.FindElement(By.Id("loginusername")).SendKeys(Username);
             Driver.FindElement(By.Id("loginpassword")).SendKeys(Password);
+
+            //remove thread.sleep
             Thread.Sleep(1000);
 
             Driver.FindElement(By.XPath("//button[contains(text(), 'Log in')]")).Click();
@@ -80,6 +77,9 @@ namespace DemoBlaze.specs.PageObjectModels
 
         public void selectItem(int itemToBeSelected) => Driver.FindElement(By.CssSelector("#tbodyid > div:nth-child(" + itemToBeSelected + ") > div > a > img")).Click();
 
+        //method at line 83 be simplified like this. Also, try naming the methods to start with Uppercase letter
+        public ReadOnlyCollection<IWebElement> ReturnAllElementsFiltered2() => Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
+
         public ReadOnlyCollection<IWebElement> returnAllElementsFiltered()
         {
             ReadOnlyCollection<IWebElement> _elements = Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
@@ -115,7 +115,9 @@ namespace DemoBlaze.specs.PageObjectModels
             IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
 
             //to check difference between logged in and not logged in
-            Assert.Equal("Product added", alert.Text);
+            //this can be done as well like this:
+            Assert.Contains("Product added", alert.Text);
+            //Assert.Equal("Product added", alert.Text);
 
             Thread.Sleep(1000);
 
@@ -145,6 +147,8 @@ namespace DemoBlaze.specs.PageObjectModels
             return productName;
         }
 
+
+        //the following 2 methods could be extracted into a Common class, and used throughout the project, when needed. I saw the same method in CartPage.cs class
         public void NavigateTo()
         {
             Driver.Navigate().GoToUrl(HomeUrl);

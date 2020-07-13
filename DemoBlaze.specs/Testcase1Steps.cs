@@ -12,6 +12,8 @@ namespace DemoBlaze.specs
     [Binding, Scope(Feature = "Testcase1")]
     public class Testcase1Steps
     {
+
+        // all the variables used here can be made private
         public static IWebDriver driver;
 
         public Boolean findFlag = false;
@@ -26,6 +28,8 @@ namespace DemoBlaze.specs
 
         public int totalPrice = 0;
         public int remainingBudget;
+
+        //temp budget can be declared only where it's used, since it's not used in other methods
         public int tempBudget;
 
         Random number = new Random();
@@ -38,6 +42,7 @@ namespace DemoBlaze.specs
             homePage.NavigateTo();
 
             homePage.clickLoginButton();
+            //remove  thread.sleep
             Thread.Sleep(1000);
             homePage.loginEnterCredentials(username, password);
 
@@ -62,6 +67,7 @@ namespace DemoBlaze.specs
         [Then(@"I can add to cart 2 random phones that don't exceed my budget")]
         public void ThenICanAddToCartRandomPhonesThatDonTExceedMyBudget()
         {
+            //try emptying the cart before executing test.
             var homePage = new HomePage(driver);
             var cartPage = new CartPage(driver);
 
@@ -70,6 +76,7 @@ namespace DemoBlaze.specs
             ReadOnlyCollection<IWebElement> _divs = homePage.returnAllElementsFiltered();
             int selector = number.Next(1, _divs.Count);
 
+            //phoneName1 not returning product name
             phoneName1 = homePage.getProductName(selector);
             phonePrice1 = homePage.getProductPrice(selector);
 
@@ -97,6 +104,7 @@ namespace DemoBlaze.specs
                     homePage.NavigateTo();
                     continue;
                 }
+                //redundant else. as you have the continue keyword in the if, you can lose the else. Or vice versa (continue or else)
                 else
                 {
                     //add to cart
@@ -111,7 +119,7 @@ namespace DemoBlaze.specs
 
             cartPage.NavigateTo();
             Thread.Sleep(1000);
-
+            
             Assert.Equal(totalPrice, Int32.Parse(driver.FindElement(By.Id("totalp")).Text));
         }
 

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 using DemoBlaze.specs.PageObjectModels;
@@ -9,8 +10,12 @@ namespace DemoBlaze.specs
     public class Testcase2Steps
     {
         public static IWebDriver driver;
-
+        //FeedbackCristianPopescu
+        //use a guid for creating new users. this way you are sure that each time you run the test you have a different name
+        //something like this:
+        private string _guidUsername = Guid.NewGuid().ToString("N");
         public string newUsername = "TestUser3";//pentru testele de register e bine sa se foloseasca useri unici la fiecare rulare, poti genera un user unic folosind o logica in a crea useruname-ul (vezi metoda Random())
+
         public string newPassword = "TempPassword";
 
         [Given(@"I am on the homepage")]
