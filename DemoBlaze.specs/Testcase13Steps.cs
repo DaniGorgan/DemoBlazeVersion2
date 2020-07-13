@@ -60,8 +60,8 @@ namespace DemoBlaze.specs
                 //phone
                 homePage.filterBy("Phones");
 
-                ReadOnlyCollection<IWebElement> _divs = homePage.returnAllElementsFiltered();// o denumire mai clara a variabilelor. Divs nu prea ajuta pentru a intelege ce elemente contine
-                int selector = number.Next(1, _divs.Count);
+                ReadOnlyCollection<IWebElement> _filteredProducts = homePage.returnAllElementsFiltered();// o denumire mai clara a variabilelor. Divs nu prea ajuta pentru a intelege ce elemente contine
+                int selector = number.Next(1, _filteredProducts.Count);
 
                 phoneName = homePage.getProductName(selector);
                 phonePrice = homePage.getProductPrice(selector);
@@ -82,8 +82,8 @@ namespace DemoBlaze.specs
                 //laptop
                 homePage.filterBy("Laptops");
 
-                _divs = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _divs.Count);
+                _filteredProducts = homePage.returnAllElementsFiltered();
+                selector = number.Next(1, _filteredProducts.Count);
 
                 laptopName = homePage.getProductName(selector);
                 laptopPrice = homePage.getProductPrice(selector);
@@ -104,8 +104,8 @@ namespace DemoBlaze.specs
                 //monitor
                 homePage.filterBy("Monitors");
 
-                _divs = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _divs.Count);
+                _filteredProducts = homePage.returnAllElementsFiltered();
+                selector = number.Next(1, _filteredProducts.Count);
 
                 monitorName = homePage.getProductName(selector);
                 monitorPrice = homePage.getProductPrice(selector);
@@ -135,7 +135,7 @@ namespace DemoBlaze.specs
             cartPage.NavigateTo();
             cartPage.pressCheckout();
             Thread.Sleep(1000);
-            cartPage.completeOrderForm();
+            cartPage.completeOrderForm("Test User", "Romania", "Timisoara", "1234 5678 1234 5678", "July", "2020");
 
             try
             {
