@@ -41,7 +41,8 @@ namespace DemoBlaze.specs
             ReadOnlyCollection<IWebElement> _products = homePage.returnAllElementsFiltered();
             int numberOfProducts = _products.Count();
 
-            output.WriteLine("total number of filtered products: " + numberOfProducts);
+            output.WriteLine("total number of filtered products: " + numberOfProducts); // nu vad exact unde ai afisat media. Vad doar numarul total de produse
+                                                                                        // trebuie corectat aici si afisat media nu numarul  total de produse
         }
 
         [AfterScenario]

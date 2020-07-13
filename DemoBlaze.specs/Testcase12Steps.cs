@@ -37,7 +37,8 @@ namespace DemoBlaze.specs
         public void WhenIGoToTheCartPage()
         {
             var cartPage = new CartPage(driver);
-            cartPage.NavigateTo();
+            cartPage.NavigateTo();//modul in care accesezi cart-ul se face prin URL, deci functionalitatea butonului Cart nu se verifica daca nu faci click pe el
+                                 //practic daca butonul Cart nu ar merge, user-ul nu ar putea face o comanda daca nu ar stii de URL care duce la pagina Cart
         }
         
         [When(@"I press Checkout")]

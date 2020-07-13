@@ -26,7 +26,7 @@ namespace DemoBlaze.specs
         [Given(@"I am on the homepage")]
         public void GivenIAmOnTheHomepage()
         {
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(); // poti scoate driver-ul inafara metodelor si apoi doar apelezi obiectul unde ai nevoie
             var homePage = new HomePage(driver);
             homePage.NavigateTo();
         }
@@ -38,7 +38,9 @@ namespace DemoBlaze.specs
             {
                 pageInTest = pageName;
 
-                driver.FindElement(By.CssSelector("#navbarExample > ul > li.nav-item.active > a")).Click();
+                driver.FindElement(By.CssSelector("#navbarExample > ul > li.nav-item.active > a")).Click();// poti scoate intr-o metoda in HomePage, partea asta de navigare
+                                                                                                            // gen GoToHomePage(); sau poti face o metoda care sa navigheze la o pagina in functie de parametru
+                                                                                                            //asa reduci codul din Steps
                 Thread.Sleep(1000);
             }
             else if (pageName == "Contact")
@@ -88,7 +90,7 @@ namespace DemoBlaze.specs
             {
                 Assert.Equal(HomePageUrl, driver.Url);
 
-                homePage.NavigateTo();
+                homePage.NavigateTo(); // Nu mai ai nevoie de inca o navigare catre homepage
             }
             else if (pageInTest == "Contact")
             {
@@ -101,7 +103,7 @@ namespace DemoBlaze.specs
                     output.WriteLine("Popup is not present: " + exception);
                 }
 
-                homePage.NavigateTo();
+                //homePage.NavigateTo();
             }
             else if (pageInTest == "About us")
             {
@@ -114,7 +116,7 @@ namespace DemoBlaze.specs
                     output.WriteLine("Popup is not present: " + exception);
                 }
 
-                homePage.NavigateTo();
+                //homePage.NavigateTo();
             }
             else if (pageInTest == "Cart")
             {
@@ -133,7 +135,7 @@ namespace DemoBlaze.specs
                     output.WriteLine("Popup is not present: " + exception);
                 }
 
-                homePage.NavigateTo();
+               // homePage.NavigateTo();
             }
             else if (pageInTest == "Sign up")
             {

@@ -48,7 +48,9 @@ namespace DemoBlaze.specs
         }
         
         [When(@"I add the items needed in the cart")]
-        public void WhenIAddTheItemsNeededInTheCart()
+        public void WhenIAddTheItemsNeededInTheCart() // am rulat si am ajuns in cos cu produse ce valorau un total de peste 16000 de $
+                                                     // un mod de a face ar fi sa iei produsul din fiecare categorie care are cel mai mic pret, le adaugi in cart si apoi verifici ca se 
+                                                    // incadreaza in buget
         {
             var homePage = new HomePage(driver);
             tempBudget = remainingBudget;
@@ -58,7 +60,7 @@ namespace DemoBlaze.specs
                 //phone
                 homePage.filterBy("Phones");
 
-                ReadOnlyCollection<IWebElement> _divs = homePage.returnAllElementsFiltered();
+                ReadOnlyCollection<IWebElement> _divs = homePage.returnAllElementsFiltered();// o denumire mai clara a variabilelor. Divs nu prea ajuta pentru a intelege ce elemente contine
                 int selector = number.Next(1, _divs.Count);
 
                 phoneName = homePage.getProductName(selector);
