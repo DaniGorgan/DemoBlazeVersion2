@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace DemoBlaze.specs.PageObjectModels
 {
-    class CartPage
+    public class CartPage
     {
         private readonly IWebDriver Driver;
 

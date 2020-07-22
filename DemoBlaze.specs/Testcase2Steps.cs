@@ -10,11 +10,14 @@ namespace DemoBlaze.specs
     public class Testcase2Steps
     {
         public static IWebDriver driver;
+        Random number = new Random();
+        
         //FeedbackCristianPopescu
         //use a guid for creating new users. this way you are sure that each time you run the test you have a different name
         //something like this:
-        private string _guidUsername = Guid.NewGuid().ToString("N");
-        public string newUsername = "TestUser3";//pentru testele de register e bine sa se foloseasca useri unici la fiecare rulare, poti genera un user unic folosind o logica in a crea useruname-ul (vezi metoda Random())
+        //private string _guidUsername = Guid.NewGuid().ToString("N");
+
+        public string newUsername = "TestUser";//pentru testele de register e bine sa se foloseasca useri unici la fiecare rulare, poti genera un user unic folosind o logica in a crea useruname-ul (vezi metoda Random())
 
         public string newPassword = "TempPassword";
 
@@ -37,6 +40,9 @@ namespace DemoBlaze.specs
         public void WhenIFillInRequiredData()
         {
             var homePage = new HomePage(driver);
+            int randomNumber = number.Next(1, 50000);
+
+            newUsername += randomNumber;
             homePage.fillSignUpForm(newUsername, newPassword);
         }
         

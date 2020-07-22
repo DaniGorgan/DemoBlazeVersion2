@@ -90,7 +90,7 @@ namespace DemoBlaze.specs
             {
                 Assert.Equal(HomePageUrl, driver.Url);
 
-                homePage.NavigateTo(); // Nu mai ai nevoie de inca o navigare catre homepage
+                //homePage.NavigateTo(); // Nu mai ai nevoie de inca o navigare catre homepage
             }
             else if (pageInTest == "Contact")
             {

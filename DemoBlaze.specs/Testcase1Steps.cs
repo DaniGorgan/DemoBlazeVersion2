@@ -14,23 +14,20 @@ namespace DemoBlaze.specs
     {
 
         // all the variables used here can be made private
-        public static IWebDriver driver;
+        private static IWebDriver driver;
 
-        public Boolean findFlag = false;
+        private Boolean findFlag = false;
 
-        public string phoneName1;
-        public string phonePrice1;
-        public string phoneName2;
-        public string phonePrice2;
+        private string phoneName1;
+        private string phonePrice1;
+        private string phoneName2;
+        private string phonePrice2;
 
-        public string username = "TestUser1";
-        public string password = "TempPassword";
+        private string username = "TestUser1";
+        private string password = "TempPassword";
 
-        public int totalPrice = 0;
-        public int remainingBudget;
-
-        //temp budget can be declared only where it's used, since it's not used in other methods
-        public int tempBudget;
+        private int totalPrice = 0;
+        private int remainingBudget;
 
         Random number = new Random();
 
@@ -42,8 +39,10 @@ namespace DemoBlaze.specs
             homePage.NavigateTo();
 
             homePage.clickLoginButton();
+
             //remove  thread.sleep
             Thread.Sleep(1000);
+
             homePage.loginEnterCredentials(username, password);
 
             string welcomeText = "Welcome " + username;
@@ -67,6 +66,9 @@ namespace DemoBlaze.specs
         [Then(@"I can add to cart 2 random phones that don't exceed my budget")]
         public void ThenICanAddToCartRandomPhonesThatDonTExceedMyBudget()
         {
+            //temp budget can be declared only where it's used, since it's not used in other methods
+            int tempBudget;
+
             //try emptying the cart before executing test.
             var homePage = new HomePage(driver);
             var cartPage = new CartPage(driver);
@@ -104,17 +106,18 @@ namespace DemoBlaze.specs
                     homePage.NavigateTo();
                     continue;
                 }
+
+                //done
                 //redundant else. as you have the continue keyword in the if, you can lose the else. Or vice versa (continue or else)
-                else
-                {
-                    //add to cart
-                    homePage.addItemToCart(selector);
+                
+                //add to cart
+                homePage.addItemToCart(selector);
 
-                    findFlag = true;
+                findFlag = true;
 
-                    tempBudget -= Int32.Parse(phonePrice2);
-                    totalPrice += Int32.Parse(phonePrice2);
-                }
+                tempBudget -= Int32.Parse(phonePrice2);
+                totalPrice += Int32.Parse(phonePrice2);
+                
             }
 
             cartPage.NavigateTo();

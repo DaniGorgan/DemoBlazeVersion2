@@ -66,71 +66,86 @@ namespace DemoBlaze.specs
 
             while (findFlag == false)
             {
-                //phone
-                homePage.filterBy("Phones");
+                //monitor
+                homePage.filterBy("Monitors");
 
                 ReadOnlyCollection<IWebElement> _filteredProducts = homePage.returnAllElementsFiltered();// o denumire mai clara a variabilelor. Divs nu prea ajuta pentru a intelege ce elemente contine
                 int selector = number.Next(1, _filteredProducts.Count);
 
-                phoneName = homePage.getProductName(selector);
-                phonePrice = homePage.getProductPrice(selector);
-
-                homePage.addItemToCart(selector);
-
-                //adjust budget after selecting item
-                tempBudget -= Int32.Parse(phonePrice);
-
-                homePage.NavigateTo();
-
-                if (tempBudget < 0)
-                {
-                    tempBudget = remainingBudget;
-                    continue;
-                };
-
-                //laptop
-                homePage.filterBy("Laptops");
-
-                _filteredProducts = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _filteredProducts.Count);
-
-                laptopName = homePage.getProductName(selector);
-                laptopPrice = homePage.getProductPrice(selector);
-
-                homePage.addItemToCart(selector);
-
-                //adjust budget after selecting item
-                tempBudget -= Int32.Parse(laptopPrice);
-
-                homePage.NavigateTo();
-
-                if (tempBudget < 0)
-                {
-                    tempBudget = remainingBudget;
-                    continue;
-                };
-
-                //monitor
-                homePage.filterBy("Monitors");
-
-                _filteredProducts = homePage.returnAllElementsFiltered();
-                selector = number.Next(1, _filteredProducts.Count);
-
                 monitorName = homePage.getProductName(selector);
                 monitorPrice = homePage.getProductPrice(selector);
-
-                homePage.addItemToCart(selector);
 
                 //adjust budget after selecting item
                 tempBudget -= Int32.Parse(monitorPrice);
 
-                homePage.NavigateTo();
-
-                if (tempBudget > 0) 
-                    findFlag = true;
-                else 
+                if (tempBudget > 0)
+                {
+                    homePage.addItemToCart(selector);
+                    homePage.NavigateTo();
+                }
+                else
                 {
                     tempBudget = remainingBudget;
+                    homePage.NavigateTo();
+                    continue;
+                }
+
+                remainingBudget = tempBudget; //Re-adjust remaining budget after selecting a Monitor
+
+                //laptop
+                while (remainingBudget - tempBudget <= 320) //320 is the lowest price of a phone - needed in the next product selection
+                {
+                    homePage.filterBy("Laptops");
+
+                    _filteredProducts = homePage.returnAllElementsFiltered();
+                    selector = number.Next(1, _filteredProducts.Count);
+
+                    laptopName = homePage.getProductName(selector);
+                    laptopPrice = homePage.getProductPrice(selector);
+
+                    //adjust budget after selecting item
+                    tempBudget -= Int32.Parse(laptopPrice);
+
+                    if (tempBudget < 320)
+                    {
+                        tempBudget = remainingBudget;
+                        homePage.NavigateTo();
+                        continue;
+                    }
+                    else
+                    {
+                        homePage.addItemToCart(selector);
+                        homePage.NavigateTo();
+                    }
+                }
+
+                remainingBudget = tempBudget; //Re-adjust remaining budget after selecting a Laptop
+
+                //phone
+                while (remainingBudget - tempBudget <= 0)
+                {
+                    homePage.filterBy("Phones");
+
+                    _filteredProducts = homePage.returnAllElementsFiltered();
+                    selector = number.Next(1, _filteredProducts.Count);
+
+                    phoneName = homePage.getProductName(selector);
+                    phonePrice = homePage.getProductPrice(selector);
+
+                    //adjust budget after selecting item
+                    tempBudget -= Int32.Parse(phonePrice);
+
+                    if (tempBudget < 0)
+                    {
+                        tempBudget = remainingBudget;
+                        homePage.NavigateTo();
+                    }
+                    else
+                    {
+                        homePage.addItemToCart(selector);
+                        homePage.NavigateTo();
+                        findFlag = true;
+                    }
                 }
             }
             

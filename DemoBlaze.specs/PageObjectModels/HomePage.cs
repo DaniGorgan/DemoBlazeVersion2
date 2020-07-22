@@ -78,14 +78,9 @@ namespace DemoBlaze.specs.PageObjectModels
         public void selectItem(int itemToBeSelected) => Driver.FindElement(By.CssSelector("#tbodyid > div:nth-child(" + itemToBeSelected + ") > div > a > img")).Click();
 
         //method at line 83 be simplified like this. Also, try naming the methods to start with Uppercase letter
-        public ReadOnlyCollection<IWebElement> ReturnAllElementsFiltered2() => Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
+        //public ReadOnlyCollection<IWebElement> ReturnAllElementsFiltered2() => Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
 
-        public ReadOnlyCollection<IWebElement> returnAllElementsFiltered()
-        {
-            ReadOnlyCollection<IWebElement> _elements = Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
-
-            return _elements;
-        }
+        public ReadOnlyCollection<IWebElement> returnAllElementsFiltered() => Driver.FindElements(By.XPath("//*[@id='tbodyid']/div"));
 
         public string getProductName_NotFiltered(int index)
         {
